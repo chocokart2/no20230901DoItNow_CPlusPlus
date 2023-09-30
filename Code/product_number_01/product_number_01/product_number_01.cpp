@@ -11,22 +11,41 @@ using namespace std;
 // 해당 프로그램이 가지고 있는 정보를 담습니다. 메모리 누수가 싫어서 만들었습니다.
 // 만약 해당 데이터 조각의 일부를 사용하고 싶으면 이 구조체의 일부를 사용할 수도 있습니다.
 
-
 // 프로그램에 저장될 모든 정보를 총괄합니다.
 typedef struct ProgramData ProgramData;
-typedef struct DailyTask DailyTask;
+// 해야 하는 일에 대해 저장합니다.
+typedef struct TaskPlan TaskPlan;
+// 해당 업무를 완수했는지 여부를 저장합니다.
+typedef struct TaskResult TaskResult;
+
+struct TaskPlan
+{
+public:
+	int index;
+	int repeatFlag;
+	string name;
+};
+
+struct TaskResult
+{
+public:
+	bool isTaskFinished;
+	int taskPlanIndex;
+};
 
 struct ProgramData
 {
 public:
-	string masterName;
 	int randomNumber = 0;
 	int taskCount = 0;
+	int plansPtrCount;
+	string masterName;
+	TaskPlan plansPtr[50];
 };
 
 void Greet(ProgramData& progamData);
 void InitateProgramData(ProgramData& target);
-void Say();
+void Say(string message);
 //void ShowTask();
 int AskMain();
 
